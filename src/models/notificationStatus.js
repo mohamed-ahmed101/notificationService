@@ -6,7 +6,7 @@ const notificationStatusSchema = new Schema({
         type: String,
         required: true
     },
-    requestID: {
+    requestId: {
         type: Schema.Types.ObjectId,
         required: true
     },
@@ -19,12 +19,11 @@ const notificationStatusSchema = new Schema({
         }
     },
     sendAt: {
-        type: Date,
-        required: true
+        type: Date
+        
     },
     retriesNumber: {
-        type: Number,
-        required: true
+        type: Number
     },
     status: {
         code: {
@@ -36,7 +35,7 @@ const notificationStatusSchema = new Schema({
         }
     }
 
-}, { timestamps: true });
+}, { timestamps: true , collection: 'notificationStatus' });
 
 const notificationStatus = mongoose.model("notificationStatus", notificationStatusSchema);
 
