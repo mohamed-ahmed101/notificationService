@@ -1,39 +1,29 @@
 const logger = require('../logger');
+const redisQueue = require('./redisQueue');
+
 module.exports = class channel {
 
     constructor(configs) {
-        this.name= configs.name
-        this.notifyFun = configs.notify
-    }
-    
-    async process(){
-     logger.info("new request done");
-     return {message :"your request has been processed"};
-    }
-
-    async initialize() {
-
+        this.name = configs.name;
+        this.queueName = configs.serviceQueue;
+        this.redisConfig = configs.redisConfig;
+        this.queueLimit = configs.queueLimit;
+        this.limitInterval = configs.limitInterval;
+        this.notifyFun = configs.notify;
+        this.queue = new redisQueue(this.queueName, this.queueLimit , this.limitInterval , this.redisConfig);
+        this.queue.onMessage = this.process.bind(this);
     }
 
-    async checkRetry() {
 
+    async process(data) {
+        logger.info("new request consumed base calss", data);
+        return { message: "your request has been processed" };
     }
 
-    async checkSuccess() {
-
-    }
-
-    async call() {
-
-    }
 
     async send() {
         let status = call();
         if (checkSuccess(status) || !checkRetry()) notify(status);
-    }
-
-    async register() {
-       
     }
 
     notify() {
