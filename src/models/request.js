@@ -6,17 +6,17 @@ const requestSchema = new Schema({
         type: Schema.Types.Mixed,
         required: true
     },
-    messageID : {
-        type : Schema.Types.ObjectId,
+    messageID: {
+        type: Schema.Types.ObjectId,
         required: true
     },
-    channel : {
-        type : String,
+    channel: {
+        type: String,
         required: true,
         enum: {
-           values : ['SMS', 'PUSH'],
-        message: '{VALUE} is not supported'  
-        } 
+            values: ['SMS', 'PUSH'],
+            message: '{VALUE} is not supported'
+        }
     },
     expireAt: {
         type: Date,
@@ -27,9 +27,12 @@ const requestSchema = new Schema({
         required: true
     },
     retry: {
-        type : Number,
+        type: Number,
         required: true
     },
+    status: {
+        type: String
+    }
 
 }, { timestamps: true });
 
