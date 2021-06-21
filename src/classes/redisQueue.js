@@ -30,9 +30,8 @@ class redisQueue extends redisDB {
         do {
             try {
                 msg = await this.bzpopmin(this.qName, 0); // Monitor queue forever
-                console.log(`new message consumeddd from ${this.qName} queue `, msg)
                 // Proceed only on incoming message and re-monitor for next
-                msg = msg[1]// msg:>> [queueName, msgContent]
+                msg = JSON.parse(msg[1]); // msg:>> [queueName, msgContent]
                 this.onMessage(msg);
                 this.queueLimit && this.checkQueueLimit();
             } catch (error) {
