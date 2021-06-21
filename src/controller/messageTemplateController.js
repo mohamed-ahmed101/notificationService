@@ -12,18 +12,12 @@ module.exports = class messageTempleteController {
     }
 
     async one(body) {
-        let {id : _id} = body;
-        return messageTemplete.findOne({_id});
+        let { id: _id } = body;
+        return messageTemplete.findOne({ _id });
     }
 
     async save(body) {
-        const message = new messageTemplete({
-            content: {
-                arrLang: "برجاء المحاولة ",
-                engLang: "try again"
-            },
-            age: 15
-        })
+        const message = new messageTemplete(body)
         return message.save();
     }
 
