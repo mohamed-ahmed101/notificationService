@@ -1,5 +1,7 @@
 const logger = require('../logger');
 const redisQueue = require('./redisQueue');
+const redisConnection = require('../connection/redis');
+
 
 module.exports = class channel {
 
@@ -10,7 +12,8 @@ module.exports = class channel {
         this.queueLimit = configs.queueLimit;
         this.limitInterval = configs.limitInterval;
         this.notifyFun = configs.notify;
-        this.queue = new redisQueue(this.queueName, this.queueLimit , this.limitInterval , this.redisConfig);
+        this.queue = new redisQueue(this.queueName, this.queueLimit, this.limitInterval, this.redisConfig);
+        this.redisClient = new redisConnection(this.redisConfig);
         this.queue.onMessage = this.process.bind(this);
     }
 
@@ -26,7 +29,9 @@ module.exports = class channel {
         if (checkSuccess(status) || !checkRetry()) notify(status);
     }
 
-    notify() {
+    async notify(responseQueue, data) {
+        console.log("going to send result");
+        await this.redisClient.zadd(responseQueue, 0, JSON.stringify(data))
 
     }
 }
