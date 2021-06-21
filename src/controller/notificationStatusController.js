@@ -25,6 +25,11 @@ module.exports = class notificationStatusController {
         return await notificationStatus.insertMany(body);
     }
 
+    async bulkUpdate(body) {
+        let { usersList, requestId, retriesNumber, status } = body
+        return await notificationStatus.updateMany({ userIdentifier: { $in: usersList }, requestId }, { retriesNumber, status });
+    }
+
     async remove(body) {
         let userToRemove = await notificationStatus.findOne(request.params.id);
         await notificationStatus.remove(userToRemove);
