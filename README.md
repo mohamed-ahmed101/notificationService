@@ -13,13 +13,6 @@ using publish and subscripe techniques to deliver messages .
 - redis
 - mongo
 
-
-## 
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-  
-
 ## Installation 
 
 Install notificationService 
