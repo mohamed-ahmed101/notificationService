@@ -1,0 +1,29 @@
+@url = http://localhost:3000
+
+GET {{url}}
+###
+
+post {{url}}/addTempalte
+Content-Type: application/json
+
+{
+   "content": {
+      "arrLang": "للحصول على خصم 20% استخدم البرومو كود {{`promoCode`}}",
+       "engLang": "use this {{`promoCode`}} to get 20% discount "
+     }
+}
+
+###
+get {{url}}/getTempaltes
+Content-Type: application/json
+
+###
+
+###
+post {{url}}/getTempalteById
+Content-Type: application/json
+
+{
+     "id" : "60d24cce9b0fb600230730ca"
+}
+###

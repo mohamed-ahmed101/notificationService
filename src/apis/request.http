@@ -1,0 +1,37 @@
+@url = http://localhost:3000
+
+GET {{url}}
+###
+
+post {{url}}/addRequest
+Content-Type: application/json
+
+{
+     "usersList": [{
+          "userIdentifier": "01015842240", 
+          "preferredLang":"arrLang",
+          "templateData" : {
+               "promoCode" : "428555"
+          }
+     }],
+     "messageID": "60d24cce9b0fb600230730ca",
+     "channel": "PUSH",
+     "expireAt": 1999314790830,
+     "sendAt": 0,
+     "retry": 2
+}
+
+###
+get {{url}}/getRequests
+Content-Type: application/json
+
+###
+
+###
+post {{url}}/getRequestById
+Content-Type: application/json
+
+{
+     "id" : "60d251c695c0e90020622664"
+}
+###
