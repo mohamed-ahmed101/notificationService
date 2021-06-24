@@ -1,11 +1,12 @@
 module.exports = [
-    {
-        serviceName: "SMS",
-        channelservice: require('./smsService')
-    },
+    // {
+    //     serviceName: "SMS",
+    //     serviceQueue : "SMSQueue"
+    //    
+    // },
     {
         serviceName: "PUSH",
-        channelservice: require('./pushNotificationService')
+        serviceQueue : "PUSHQueue"
     },
 
 ]

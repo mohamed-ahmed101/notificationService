@@ -8,8 +8,14 @@ const messageTemplateController = new messageTempleteControllerClass();
 
 module.exports = class requestController {
 
+
+    async hi() {
+        console.log("hoiiii")
+        return { greeting: "hi" };
+    }
+
     async all() {
-        return request.find();
+        return await request.find()
     }
 
     async filter(body) {
@@ -31,8 +37,8 @@ module.exports = class requestController {
         const notificationReq = new request(body);
         let saveRequestResult = await notificationReq.save();
         if (body.status) throw channelsServiceResult;
-        let channelsServiceResult = await channelsService.process(body.channel, {...body, content: messageTemplateResult.content }, saveRequestResult._id);
-        if(channelsServiceResult?.serverCode) throw channelsServiceResult;
+        let channelsServiceResult = await channelsService.process(body.channel, { ...body, content: messageTemplateResult.content }, saveRequestResult._id);
+        if (channelsServiceResult?.serverCode) throw channelsServiceResult;
         let notificationsStatusData = this.requestFormat(body, saveRequestResult._id);
         await notificationStatusController.bulksave(notificationsStatusData);
         return saveRequestResult;
