@@ -2,7 +2,6 @@ const channelClass = require('../classes/channel');
 const logger = require('../logger');
 const { pushNotificationRequest } = require('../heplers/mockProviderResponse');
 const redisConfig = require('../configs/redisConfigs');
-const { json } = require('express');
 const configs = {
     name: "pushNotificationService",
     serviceQueue: "PUSHQueue",
@@ -18,7 +17,7 @@ class pushNotificationService extends channelClass {
     }
 
     async process(data) {
-        logger.info(`new rconsumedddequest consumed at ${configs.name} `, { data });
+        logger.info(`new request consumed at ${configs.name} `, { data });
         this.send(data)
         return { message: "your request has been processed" };
     }
@@ -31,7 +30,7 @@ class pushNotificationService extends channelClass {
         let basicData = { usersList: message.usersList, requestId, retriesNumber: messageData.retriesNumber };
         let statusCode = "";
         let providerResponse = await pushNotificationRequest(message);
-        console.log("pushNotificationProviderResopnse ->>>", providerResponse)
+        logger.info("pushNotificationProviderResopnse ->>>", {providerResponse});
         if (providerResponse) statusCode = "success";
         else if (this.Expired(expireAt)) statusCode = "expired";
         else if (!providerResponse && --messageData.retry)
