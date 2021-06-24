@@ -8,20 +8,10 @@ const messageTemplateController = new messageTempleteControllerClass();
 
 module.exports = class requestController {
 
-
-    async hi() {
-        console.log("hoiiii")
-        return { greeting: "hi" };
-    }
-
     async all() {
         return await request.find()
     }
 
-    async filter(body) {
-        let { service_id, amount, operator_id, service_provider_id } = body;
-        return request.find({ service_id });
-    }
 
     async one(body) {
         let { id: _id } = body;
@@ -36,7 +26,7 @@ module.exports = class requestController {
         channelsServiceCheck?.serverCode && (body.status = channelsServiceCheck.serverMsg);
         const notificationReq = new request(body);
         let saveRequestResult = await notificationReq.save();
-        if (body.status) throw channelsServiceResult;
+        if (body.status) throw channelsServiceCheck;
         let channelsServiceResult = await channelsService.process(body.channel, { ...body, content: messageTemplateResult.content }, saveRequestResult._id);
         if (channelsServiceResult?.serverCode) throw channelsServiceResult;
         let notificationsStatusData = this.requestFormat(body, saveRequestResult._id);
