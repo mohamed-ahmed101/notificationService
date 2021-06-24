@@ -30,7 +30,7 @@ module.exports = class channel {
     }
 
     async notify(responseQueue, data) {
-        console.log("going to send result");
+        logger.info("going to send result");
         await this.redisClient.zadd(responseQueue, 0, JSON.stringify(data))
 
     }

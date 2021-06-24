@@ -51,7 +51,7 @@ class channelsService {
         let messages = []
         for (let { userIdentifier, preferredLang, templateData } of usersList) {
             let message = content[preferredLang];
-            !message && console.log("no content") //return 
+            !message && logger.error("no content") //return 
             messages.push({
                 messageText: replace(message, templateData),
                 usersList: [userIdentifier]
@@ -64,7 +64,7 @@ class channelsService {
         let data = usersList.reduce((acc, user) => {
             let { userIdentifier, preferredLang } = user;
             let messageText = content[preferredLang];
-            !messageText && console.log("no content") //return acc ;
+            !messageText && logger.error("no content") //return acc ;
             acc[preferredLang] = !acc[preferredLang] ?
                 { messageText, usersList: [userIdentifier] } : {
                     ...acc[preferredLang], usersList: [...acc[preferredLang].usersList, userIdentifier]
@@ -75,8 +75,8 @@ class channelsService {
     }
 
    async notify(data) {
-        await messageTemplateController.bulkUpdate(data)
-        console.log("recived rsponse ->>>>>>>>", data);
+    logger.info("recived response ->>>>>>>>", {data});
+    await messageTemplateController.bulkUpdate(data); 
     }
 }
 
