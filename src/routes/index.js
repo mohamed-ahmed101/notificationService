@@ -23,17 +23,6 @@ module.exports = (app) => {
 
 
         })
-
-        // app[method](route, ...(middlewares ? middlewares : {}), (req, res, next) => {
-        //     console.log("req.body", req.body)
-        //     const result = (new controller)[action](req.body);
-        //     if (result instanceof Promise) {
-        //         result.then(result => result !== null && result !== undefined ? sendResponse({ res, responseBody: result }) : undefined);
-
-        //     } else if (result !== null && result !== undefined) {
-        //         res.json(result);
-        //     }
-        // });
     });
 
 }
