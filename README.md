@@ -25,10 +25,10 @@ Install notificationService
 
 - development 
 ```bash 
-  docker-compose -f docker-compose.yml -f docker-compose.dev.yml -d --build
+  docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
 ```
 - production 
 ```bash 
-  docker-compose -f docker-compose.yml -f docker-compose.prod.yml -d --build
+  docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
 ```
 
