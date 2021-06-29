@@ -14,7 +14,12 @@ services:
             context: .
             dockerfile: DockerPushNotificationfile
         depends_on: 
-            - mongo
+            - redis
+    sms-service:
+        build:
+            context: .
+            dockerfile: DockerPushNotificationfile
+        depends_on: 
             - redis
 
     mongo:
